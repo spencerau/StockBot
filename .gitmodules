@@ -1,0 +1,4 @@
+
+[submodule "Auto-StockerTrader"]
+	path = Auto-StockerTrader
+	url = https://github.com/Prem-ium/Auto-StockTrader.git
