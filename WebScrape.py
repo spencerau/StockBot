@@ -82,7 +82,7 @@ def main():
     driver = setup_driver()
     try:
         trades_data = scrape_trades(driver, url, FILTER_TODAY)
-        write_to_csv(trades_data, 'trades_data.csv')
+        write_to_csv(trades_data, 'assets/trades_data.csv')
     finally:
         driver.quit()
 
