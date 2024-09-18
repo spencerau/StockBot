@@ -64,10 +64,17 @@ def insertFromCSV():
         for row in reader:
             # Insert Issuer, or get existing id
             namecodecountry = row['Issuer'].split(':')
-            cursor.execute("SELECT id FROM Issuer WHERE name = ?", (row['Issuer'],))
+            print(namecodecountry)
+            namecode = namecodecountry[0].rsplit(" ",1)
+            country = 'none'
+            if len(namecodecountry)>1:
+                country = namecodecountry[1]
+
+
+            cursor.execute("SELECT id FROM Issuer WHERE name = ?", (namecode[0],))
             issuer_id = cursor.fetchone()
             if issuer_id is None:
-                cursor.execute("INSERT INTO Issuer (name) VALUES (?)", (row['Issuer'],))
+                cursor.execute("INSERT INTO Issuer (name,ticker,country) VALUES (?,?,?)", (namecode[0],namecode[1],country,))
                 issuer_id = cursor.lastrowid
             else:
                 issuer_id = issuer_id[0]
@@ -116,3 +123,6 @@ def insertFromCSV():
 
     # Close the connection
     conn.close()
+
+
+insertFromCSV()
